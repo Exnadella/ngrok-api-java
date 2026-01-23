@@ -145,8 +145,9 @@ public class Credentials {
         
         /**
          * If supplied at credential creation, ownership will be assigned to the specified
-         * User or Bot. Only admins may specify an owner other than themselves. Defaults to
-         * the authenticated User or Bot.
+         * User or Service User. Only admins may specify an owner other than themselves.
+         * Defaults to the authenticated User or Service User. Accepts one of: User ID,
+         * User email, or SCIM User ID.
          *
          * @param ownerId the value of the owner_id parameter as a {@link String}
          * @return the call builder instance
@@ -158,8 +159,9 @@ public class Credentials {
 
         /**
          * If supplied at credential creation, ownership will be assigned to the specified
-         * User or Bot. Only admins may specify an owner other than themselves. Defaults to
-         * the authenticated User or Bot.
+         * User or Service User. Only admins may specify an owner other than themselves.
+         * Defaults to the authenticated User or Service User. Accepts one of: User ID,
+         * User email, or SCIM User ID.
          *
          * @param ownerId the value of the owner_id parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
@@ -348,7 +350,8 @@ public class Credentials {
         }
         
         /**
-         * Sets the <code>before_id</code> parameter.
+         * Expects a resource ID as its input. Returns earlier entries in the result set,
+         * sorted by ID.
          *
          * @param beforeId the value of the before_id parameter as a {@link String}
          * @return the call builder instance
@@ -359,7 +362,8 @@ public class Credentials {
         }
 
         /**
-         * Sets (or unsets) the <code>before_id</code> parameter.
+         * Expects a resource ID as its input. Returns earlier entries in the result set,
+         * sorted by ID.
          *
          * @param beforeId the value of the before_id parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
@@ -370,7 +374,8 @@ public class Credentials {
         }
         
         /**
-         * Sets the <code>limit</code> parameter.
+         * Constrains the number of results in the dataset. See the <a
+         * href="https://ngrok.com/docs/api/index#pagination">API Overview</a> for details.
          *
          * @param limit the value of the limit parameter as a {@link String}
          * @return the call builder instance
@@ -381,7 +386,8 @@ public class Credentials {
         }
 
         /**
-         * Sets (or unsets) the <code>limit</code> parameter.
+         * Constrains the number of results in the dataset. See the <a
+         * href="https://ngrok.com/docs/api/index#pagination">API Overview</a> for details.
          *
          * @param limit the value of the limit parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
@@ -392,7 +398,11 @@ public class Credentials {
         }
         
         /**
-         * Sets the <code>filter</code> parameter.
+         * A CEL expression to filter the list results. Supports logical and comparison
+         * operators to match on fields such as <code>id</code>, <code>metadata</code>,
+         * <code>created_at</code>, and more. See ngrok API Filtering for syntax and field
+         * details: <a
+         * href="https://ngrok.com/docs/api/api-filtering">https://ngrok.com/docs/api/api-filtering</a>.
          *
          * @param filter the value of the filter parameter as a {@link String}
          * @return the call builder instance
@@ -403,7 +413,11 @@ public class Credentials {
         }
 
         /**
-         * Sets (or unsets) the <code>filter</code> parameter.
+         * A CEL expression to filter the list results. Supports logical and comparison
+         * operators to match on fields such as <code>id</code>, <code>metadata</code>,
+         * <code>created_at</code>, and more. See ngrok API Filtering for syntax and field
+         * details: <a
+         * href="https://ngrok.com/docs/api/api-filtering">https://ngrok.com/docs/api/api-filtering</a>.
          *
          * @param filter the value of the filter parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
