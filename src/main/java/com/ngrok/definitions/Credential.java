@@ -50,7 +50,7 @@ public class Credential {
      * @param metadata arbitrary user-defined machine-readable data of this credential. Optional, max 4096 bytes.
      * @param token the credential&#39;s authtoken that can be used to authenticate an ngrok agent. <strong>This value is only available one time, on the API response from credential creation, otherwise it is null.</strong>
      * @param acl optional list of ACL rules. If unspecified, the credential will have no restrictions. The only allowed ACL rule at this time is the <code>bind</code> rule. The <code>bind</code> rule allows the caller to restrict what domains, addresses, and labels the token is allowed to bind. For example, to allow the token to open a tunnel on example.ngrok.io your ACL would include the rule <code>bind:example.ngrok.io</code>. Bind rules for domains may specify a leading wildcard to match multiple domains with a common suffix. For example, you may specify a rule of <code>bind:*.example.com</code> which will allow <code>x.example.com</code>, <code>y.example.com</code>, <code>*.example.com</code>, etc. Bind rules for labels may specify a wildcard key and/or value to match multiple labels. For example, you may specify a rule of <code>bind:*=example</code> which will allow <code>x=example</code>, <code>y=example</code>, etc. A rule of <code>&#39;*&#39;</code> is equivalent to no acl at all and will explicitly permit all actions.
-     * @param ownerId If supplied at credential creation, ownership will be assigned to the specified User or Bot. Only admins may specify an owner other than themselves. Defaults to the authenticated User or Bot.
+     * @param ownerId If supplied at credential creation, ownership will be assigned to the specified User or Service User. Only admins may specify an owner other than themselves. Defaults to the authenticated User or Service User. Accepts one of: User ID, User email, or SCIM User ID.
      */
     @JsonCreator
     public Credential(
@@ -155,8 +155,9 @@ public class Credential {
 
     /**
      * If supplied at credential creation, ownership will be assigned to the specified
-     * User or Bot. Only admins may specify an owner other than themselves. Defaults to
-     * the authenticated User or Bot.
+     * User or Service User. Only admins may specify an owner other than themselves.
+     * Defaults to the authenticated User or Service User. Accepts one of: User ID,
+     * User email, or SCIM User ID.
      *
      * @return the value of the property as a {@link String} wrapped in an {@link Optional}
      */

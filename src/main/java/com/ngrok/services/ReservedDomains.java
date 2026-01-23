@@ -43,6 +43,7 @@ public class ReservedDomains {
         private Optional<String> metadata = Optional.empty();
         private Optional<String> certificateId = Optional.empty();
         private Optional<ReservedDomainCertPolicy> certificateManagementPolicy = Optional.empty();
+        private Optional<java.util.List<ReservedDomainResolvesToEntry>> resolvesTo = Optional.empty();
 
         private CreateCallBuilder(
         ) {
@@ -197,6 +198,30 @@ public class ReservedDomains {
         }
         
         /**
+         * DNS resolver targets configured for the reserved domain, or empty for
+         * &#34;global&#34; resolution.
+         *
+         * @param resolvesTo the value of the resolves_to parameter as a {@link java.util.List} of {@link ReservedDomainResolvesToEntry}
+         * @return the call builder instance
+         */
+        public CreateCallBuilder resolvesTo(final java.util.List<ReservedDomainResolvesToEntry> resolvesTo) {
+            this.resolvesTo = Optional.of(Objects.requireNonNull(resolvesTo, "resolvesTo is required"));
+            return this;
+        }
+
+        /**
+         * DNS resolver targets configured for the reserved domain, or empty for
+         * &#34;global&#34; resolution.
+         *
+         * @param resolvesTo the value of the resolves_to parameter as an {@link Optional} of {@link java.util.List} of {@link ReservedDomainResolvesToEntry}
+         * @return the call builder instance
+         */
+        public CreateCallBuilder resolvesTo(final Optional<java.util.List<ReservedDomainResolvesToEntry>> resolvesTo) {
+            this.resolvesTo = Objects.requireNonNull(resolvesTo, "resolvesTo is required");
+            return this;
+        }
+        
+        /**
          * Initiates the API call asynchronously.
          *
          * @return a {@link CompletionStage} of {@link ReservedDomain}
@@ -212,7 +237,8 @@ public class ReservedDomains {
                     new AbstractMap.SimpleEntry<>("description", this.description.map(Function.identity())),
                     new AbstractMap.SimpleEntry<>("metadata", this.metadata.map(Function.identity())),
                     new AbstractMap.SimpleEntry<>("certificate_id", this.certificateId.map(Function.identity())),
-                    new AbstractMap.SimpleEntry<>("certificate_management_policy", this.certificateManagementPolicy.map(Function.identity()))
+                    new AbstractMap.SimpleEntry<>("certificate_management_policy", this.certificateManagementPolicy.map(Function.identity())),
+                    new AbstractMap.SimpleEntry<>("resolves_to", Optional.of(this.resolvesTo).filter(resolvesTo -> !resolvesTo.isEmpty()).map(Function.identity()))
                 ),
                 Optional.of(ReservedDomain.class)
             );
@@ -374,7 +400,8 @@ public class ReservedDomains {
         }
         
         /**
-         * Sets the <code>before_id</code> parameter.
+         * Expects a resource ID as its input. Returns earlier entries in the result set,
+         * sorted by ID.
          *
          * @param beforeId the value of the before_id parameter as a {@link String}
          * @return the call builder instance
@@ -385,7 +412,8 @@ public class ReservedDomains {
         }
 
         /**
-         * Sets (or unsets) the <code>before_id</code> parameter.
+         * Expects a resource ID as its input. Returns earlier entries in the result set,
+         * sorted by ID.
          *
          * @param beforeId the value of the before_id parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
@@ -396,7 +424,8 @@ public class ReservedDomains {
         }
         
         /**
-         * Sets the <code>limit</code> parameter.
+         * Constrains the number of results in the dataset. See the <a
+         * href="https://ngrok.com/docs/api/index#pagination">API Overview</a> for details.
          *
          * @param limit the value of the limit parameter as a {@link String}
          * @return the call builder instance
@@ -407,7 +436,8 @@ public class ReservedDomains {
         }
 
         /**
-         * Sets (or unsets) the <code>limit</code> parameter.
+         * Constrains the number of results in the dataset. See the <a
+         * href="https://ngrok.com/docs/api/index#pagination">API Overview</a> for details.
          *
          * @param limit the value of the limit parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
@@ -418,7 +448,11 @@ public class ReservedDomains {
         }
         
         /**
-         * Sets the <code>filter</code> parameter.
+         * A CEL expression to filter the list results. Supports logical and comparison
+         * operators to match on fields such as <code>id</code>, <code>metadata</code>,
+         * <code>created_at</code>, and more. See ngrok API Filtering for syntax and field
+         * details: <a
+         * href="https://ngrok.com/docs/api/api-filtering">https://ngrok.com/docs/api/api-filtering</a>.
          *
          * @param filter the value of the filter parameter as a {@link String}
          * @return the call builder instance
@@ -429,7 +463,11 @@ public class ReservedDomains {
         }
 
         /**
-         * Sets (or unsets) the <code>filter</code> parameter.
+         * A CEL expression to filter the list results. Supports logical and comparison
+         * operators to match on fields such as <code>id</code>, <code>metadata</code>,
+         * <code>created_at</code>, and more. See ngrok API Filtering for syntax and field
+         * details: <a
+         * href="https://ngrok.com/docs/api/api-filtering">https://ngrok.com/docs/api/api-filtering</a>.
          *
          * @param filter the value of the filter parameter as an {@link Optional} of {@link String}
          * @return the call builder instance
@@ -495,6 +533,7 @@ public class ReservedDomains {
         private Optional<String> metadata = Optional.empty();
         private Optional<String> certificateId = Optional.empty();
         private Optional<ReservedDomainCertPolicy> certificateManagementPolicy = Optional.empty();
+        private Optional<java.util.List<ReservedDomainResolvesToEntry>> resolvesTo = Optional.empty();
 
         private UpdateCallBuilder(
             final String id
@@ -601,6 +640,30 @@ public class ReservedDomains {
         }
         
         /**
+         * DNS resolver targets configured for the reserved domain, or empty for
+         * &#34;global&#34; resolution.
+         *
+         * @param resolvesTo the value of the resolves_to parameter as a {@link java.util.List} of {@link ReservedDomainResolvesToEntry}
+         * @return the call builder instance
+         */
+        public UpdateCallBuilder resolvesTo(final java.util.List<ReservedDomainResolvesToEntry> resolvesTo) {
+            this.resolvesTo = Optional.of(Objects.requireNonNull(resolvesTo, "resolvesTo is required"));
+            return this;
+        }
+
+        /**
+         * DNS resolver targets configured for the reserved domain, or empty for
+         * &#34;global&#34; resolution.
+         *
+         * @param resolvesTo the value of the resolves_to parameter as an {@link Optional} of {@link java.util.List} of {@link ReservedDomainResolvesToEntry}
+         * @return the call builder instance
+         */
+        public UpdateCallBuilder resolvesTo(final Optional<java.util.List<ReservedDomainResolvesToEntry>> resolvesTo) {
+            this.resolvesTo = Objects.requireNonNull(resolvesTo, "resolvesTo is required");
+            return this;
+        }
+        
+        /**
          * Initiates the API call asynchronously.
          *
          * @return a {@link CompletionStage} of {@link ReservedDomain}
@@ -614,7 +677,8 @@ public class ReservedDomains {
                     new AbstractMap.SimpleEntry<>("description", this.description.map(Function.identity())),
                     new AbstractMap.SimpleEntry<>("metadata", this.metadata.map(Function.identity())),
                     new AbstractMap.SimpleEntry<>("certificate_id", this.certificateId.map(Function.identity())),
-                    new AbstractMap.SimpleEntry<>("certificate_management_policy", this.certificateManagementPolicy.map(Function.identity()))
+                    new AbstractMap.SimpleEntry<>("certificate_management_policy", this.certificateManagementPolicy.map(Function.identity())),
+                    new AbstractMap.SimpleEntry<>("resolves_to", Optional.of(this.resolvesTo).filter(resolvesTo -> !resolvesTo.isEmpty()).map(Function.identity()))
                 ),
                 Optional.of(ReservedDomain.class)
             );

@@ -51,6 +51,9 @@ public class ReservedDomain {
     @JsonProperty("acme_challenge_cname_target")
     @JsonInclude(value = JsonInclude.Include.NON_ABSENT)
     private final Optional<String> acmeChallengeCnameTarget;
+    @JsonProperty("resolves_to")
+    @JsonInclude(value = JsonInclude.Include.NON_ABSENT)
+    private final Optional<java.util.List<ReservedDomainResolvesToEntry>> resolvesTo;
 
     /**
      * Creates a new instance of {@link ReservedDomain}.
@@ -67,6 +70,7 @@ public class ReservedDomain {
      * @param certificateManagementPolicy configuration for automatic management of TLS certificates for this domain, or null if automatic management is disabled
      * @param certificateManagementStatus status of the automatic certificate management for this domain, or null if automatic management is disabled
      * @param acmeChallengeCnameTarget DNS CNAME target for the host _acme-challenge.example.com, where example.com is your reserved domain name. This is required to issue certificates for wildcard, non-ngrok reserved domains. Must be null for non-wildcard domains and ngrok subdomains.
+     * @param resolvesTo DNS resolver targets configured for the reserved domain, or empty for &#34;global&#34; resolution.
      */
     @JsonCreator
     public ReservedDomain(
@@ -81,7 +85,8 @@ public class ReservedDomain {
         @JsonProperty("certificate") final Optional<Ref> certificate,
         @JsonProperty("certificate_management_policy") final Optional<ReservedDomainCertPolicy> certificateManagementPolicy,
         @JsonProperty("certificate_management_status") final Optional<ReservedDomainCertStatus> certificateManagementStatus,
-        @JsonProperty("acme_challenge_cname_target") final Optional<String> acmeChallengeCnameTarget
+        @JsonProperty("acme_challenge_cname_target") final Optional<String> acmeChallengeCnameTarget,
+        @JsonProperty("resolves_to") final Optional<java.util.List<ReservedDomainResolvesToEntry>> resolvesTo
     ) {
         this.id = Objects.requireNonNull(id, "id is required");
         this.uri = Objects.requireNonNull(uri, "uri is required");
@@ -95,6 +100,7 @@ public class ReservedDomain {
         this.certificateManagementPolicy = certificateManagementPolicy != null ? certificateManagementPolicy : Optional.empty();
         this.certificateManagementStatus = certificateManagementStatus != null ? certificateManagementStatus : Optional.empty();
         this.acmeChallengeCnameTarget = acmeChallengeCnameTarget != null ? acmeChallengeCnameTarget : Optional.empty();
+        this.resolvesTo = resolvesTo != null ? resolvesTo : Optional.empty();
     }
 
     /**
@@ -217,6 +223,16 @@ public class ReservedDomain {
         return this.acmeChallengeCnameTarget;
     }
 
+    /**
+     * DNS resolver targets configured for the reserved domain, or empty for
+     * &#34;global&#34; resolution.
+     *
+     * @return the value of the property as a {@link java.util.List} of {@link ReservedDomainResolvesToEntry} wrapped in an {@link Optional}
+     */
+    public Optional<java.util.List<ReservedDomainResolvesToEntry>> getResolvesTo() {
+        return this.resolvesTo;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
@@ -239,7 +255,8 @@ public class ReservedDomain {
             this.certificate.equals(other.certificate)&&
             this.certificateManagementPolicy.equals(other.certificateManagementPolicy)&&
             this.certificateManagementStatus.equals(other.certificateManagementStatus)&&
-            this.acmeChallengeCnameTarget.equals(other.acmeChallengeCnameTarget);
+            this.acmeChallengeCnameTarget.equals(other.acmeChallengeCnameTarget)&&
+            this.resolvesTo.equals(other.resolvesTo);
         
     }
 
@@ -257,7 +274,8 @@ public class ReservedDomain {
             this.certificate,
             this.certificateManagementPolicy,
             this.certificateManagementStatus,
-            this.acmeChallengeCnameTarget
+            this.acmeChallengeCnameTarget,
+            this.resolvesTo
         );
     }
 
@@ -276,6 +294,7 @@ public class ReservedDomain {
             "', certificateManagementPolicy='" + this.certificateManagementPolicy.map(Object::toString).orElse("(null)") +
             "', certificateManagementStatus='" + this.certificateManagementStatus.map(Object::toString).orElse("(null)") +
             "', acmeChallengeCnameTarget='" + this.acmeChallengeCnameTarget.orElse("(null)") +
+            "', resolvesTo='" + this.resolvesTo.map(Object::toString).orElse("(null)") +
             "'}";
     }
 }
